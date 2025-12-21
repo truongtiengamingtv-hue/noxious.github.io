@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PremiumHub - Tài khoản Premium & Công cụ Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --secondary: #4b0082;
+            --accent: #ff4500;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .current-language {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .current-language:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            min-width: 150px;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
+        }
+
+        .btn-accent {
+            background: linear-gradient(45deg, var(--accent), #ff6347);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ddd;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--light);
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .product-image {
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .product-image i {
+            font-size: 4rem;
+            color: var(--primary);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .product-description {
+            color: #aaa;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-duration {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .duration-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .duration-btn.active, .duration-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            padding: 2rem;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .cart-title {
+            font-size: 1.8rem;
+            color: var(--light);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            color: var(--light);
+        }
+
+        .cart-item-duration {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin: 0 1rem;
+        }
+
+        .quantity-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: var(--light);
+        }
+
+        .quantity {
+            margin: 0 0.5rem;
+            color: var(--light);
+        }
+
+        .remove-item {
+            color: var(--accent);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .feature-description {
+            color: #aaa;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .header-actions {
+                margin-top: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-crown"></i>PremiumHub
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home" data-i18n="nav.home">Trang Chủ</a></li>
+                        <li><a href="#products" data-i18n="nav.products">Sản Phẩm</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Tính Năng</a></li>
+                        <li><a href="#support" data-i18n="nav.support">Hỗ Trợ</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="language-selector" id="languageSelector">
+                        <div class="current-language">
+                            <img src="https://flagcdn.com/w40/vn.png" class="language-flag" alt="Vietnamese">
+                            <span data-i18n="lang.vietnamese">Tiếng Việt</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-dropdown" id="languageDropdown">
+                            <div class="language-option" data-lang="vi">
+                                <img src="https://flagcdn.com/w40/vn.png" class="language-flag" alt="Vietnamese">
+                                <span data-i18n="lang.vietnamese">Tiếng Việt</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <img src="https://flagcdn.com/w40/us.png" class="language-flag" alt="English">
+                                <span data-i18n="lang.english">English</span>
+                            </div>
+                            <div class="language-option" data-lang="zh">
+                                <img src="https://flagcdn.com/w40/cn.png" class="language-flag" alt="Chinese">
+                                <span data-i18n="lang.chinese">中文</span>
+                            </div>
+                            <div class="language-option" data-lang="ja">
+                                <img src="https://flagcdn.com/w40/jp.png" class="language-flag" alt="Japanese">
+                                <span data-i18n="lang.japanese">日本語</span>
+                            </div>
+                            <div class="language-option" data-lang="ko">
+                                <img src="https://flagcdn.com/w40/kr.png" class="language-flag" alt="Korean">
+                                <span data-i18n="lang.korean">한국어</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <a href="#contact" class="btn" data-i18n="nav.contact">Liên Hệ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-i18n="hero.title">Tài Khoản Premium & Công Cụ Pro</h1>
+                <p data-i18n="hero.description">Nâng cấp trải nghiệm của bạn với các tài khoản premium giá tốt nhất thị trường. Chúng tôi cung cấp đa dạng dịch vụ từ Capcut Pro, Meitu VIP đến ChatGPT Plus và nhiều hơn nữa.</p>
+                <a href="#products" class="btn btn-accent" data-i18n="hero.button">Mua Ngay <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title" data-i18n="products.title">Sản Phẩm <span data-i18n="products.featured">Nổi Bật</span></h2>
+            
+            <div class="category-filter" id="categoryFilter">
+                <!-- Categories will be dynamically added -->
+            </div>
+            
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be dynamically added -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title" data-i18n="features.title">Tại Sao Chọn <span data-i18n="features.us">Chúng Tôi?</span></h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="features.fast.title">Giao Dịch Nhanh Chóng</h3>
+                    <p class="feature-description" data-i18n="features.fast.description">Nhận tài khoản ngay lập tức sau khi thanh toán thành công.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="features.secure.title">Bảo Mật Tuyệt Đối</h3>
+                    <p class="feature-description" data-i18n="features.secure.description">Thông tin cá nhân và giao dịch được bảo mật an toàn.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="features.support.title">Hỗ Trợ 24/7</h3>
+                    <p class="feature-description" data-i18n="features.support.description">Đội ngũ hỗ trợ luôn sẵn sàng giải đáp mọi thắc mắc.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="features.price.title">Giá Cả Cạnh Tranh</h3>
+                    <p class="feature-description" data-i18n="features.price.description">Cam kết giá tốt nhất với chất lượng dịch vụ hàng đầu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2 class="cart-title" data-i18n="cart.title">Giỏ Hàng</h2>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be dynamically added -->
+            </div>
+            <div class="cart-total">
+                <span data-i18n="cart.total">Tổng</span>: <span id="cartTotal">0</span> VND
+            </div>
+            <button class="btn checkout-btn" id="checkoutBtn" data-i18n="cart.checkout">Thanh Toán</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.about.title">PremiumHub</h3>
+                    <p data-i18n="footer.about.description">Địa chỉ tin cậy cho các tài khoản premium và công cụ pro với giá cả phải chăng và chất lượng đảm bảo.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-zalo"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.links.title">Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="#home" data-i18n="nav.home">Trang Chủ</a></li>
+                        <li><a href="#products" data-i18n="nav.products">Sản Phẩm</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Tính Năng</a></li>
+                        <li><a href="#support" data-i18n="nav.support">Hỗ Trợ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.services.title">Dịch Vụ Phổ Biến</h3>
+                    <ul>
+                        <li><a href="#">Capcut Pro</a></li>
+                        <li><a href="#">Meitu VIP</a></li>
+                        <li><a href="#">ChatGPT Plus</a></li>
+                        <li><a href="#">Canva Pro</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact.title">Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@premiumhub.com</li>
+                        <li><i class="fas fa-phone"></i> +84 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.contact.address">Hà Nội, Việt Nam</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 PremiumHub. <span data-i18n="footer.rights">Tất cả quyền được bảo lưu.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language translations
+        const translations = {
+            vi: {
+                // Navigation
+                "nav.home": "Trang Chủ",
+                "nav.products": "Sản Phẩm",
+                "nav.features": "Tính Năng",
+                "nav.support": "Hỗ Trợ",
+                "nav.contact": "Liên Hệ",
+                
+                // Languages
+                "lang.vietnamese": "Tiếng Việt",
+                "lang.english": "English",
+                "lang.chinese": "中文",
+                "lang.japanese": "日本語",
+                "lang.korean": "한국어",
+                
+                // Hero
+                "hero.title": "Tài Khoản Premium & Công Cụ Pro",
+                "hero.description": "Nâng cấp trải nghiệm của bạn với các tài khoản premium giá tốt nhất thị trường. Chúng tôi cung cấp đa dạng dịch vụ từ Capcut Pro, Meitu VIP đến ChatGPT Plus và nhiều hơn nữa.",
+                "hero.button": "Mua Ngay",
+                
+                // Products
+                "products.title": "Sản Phẩm",
+                "products.featured": "Nổi Bật",
+                "products.all": "Tất Cả",
+                
+                // Features
+                "features.title": "Tại Sao Chọn",
+                "features.us": "Chúng Tôi?",
+                "features.fast.title": "Giao Dịch Nhanh Chóng",
+                "features.fast.description": "Nhận tài khoản ngay lập tức sau khi thanh toán thành công.",
+                "features.secure.title": "Bảo Mật Tuyệt Đối",
+                "features.secure.description": "Thông tin cá nhân và giao dịch được bảo mật an toàn.",
+                "features.support.title": "Hỗ Trợ 24/7",
+                "features.support.description": "Đội ngũ hỗ trợ luôn sẵn sàng giải đáp mọi thắc mắc.",
+                "features.price.title": "Giá Cả Cạnh Tranh",
+                "features.price.description": "Cam kết giá tốt nhất với chất lượng dịch vụ hàng đầu.",
+                
+                // Cart
+                "cart.title": "Giỏ Hàng",
+                "cart.total": "Tổng",
+                "cart.checkout": "Thanh Toán",
+                "cart.empty": "Giỏ hàng của bạn đang trống",
+                
+                // Footer
+                "footer.about.title": "PremiumHub",
+                "footer.about.description": "Địa chỉ tin cậy cho các tài khoản premium và công cụ pro với giá cả phải chăng và chất lượng đảm bảo.",
+                "footer.links.title": "Liên Kết Nhanh",
+                "footer.services.title": "Dịch Vụ Phổ Biến",
+                "footer.contact.title": "Liên Hệ",
+                "footer.contact.address": "Hà Nội, Việt Nam",
+                "footer.rights": "Tất cả quyền được bảo lưu.",
+                
+                // Categories
+                "category.video": "Video Editing",
+                "category.photo": "Chỉnh Sửa Ảnh",
+                "category.ai": "AI Tools",
+                "category.design": "Thiết Kế",
+                "category.education": "Giáo Dục",
+                "category.entertainment": "Giải Trí",
+                "category.productivity": "Công Cụ",
+                
+                // Product actions
+                "product.add": "Thêm Vào Giỏ",
+                "product.buy": "Mua Ngay",
+                
+                // Notifications
+                "notification.added": "đã được thêm vào giỏ hàng!",
+                "notification.empty": "Giỏ hàng của bạn đang trống!"
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.products": "Products",
+                "nav.features": "Features",
+                "nav.support": "Support",
+                "nav.contact": "Contact",
+                
+                // Languages
+                "lang.vietnamese": "Vietnamese",
+                "lang.english": "English",
+                "lang.chinese": "Chinese",
+                "lang.japanese": "Japanese",
+                "lang.korean": "Korean",
+                
+                // Hero
+                "hero.title": "Premium Accounts & Pro Tools",
+                "hero.description": "Upgrade your experience with premium accounts at the best market prices. We provide diverse services from Capcut Pro, Meitu VIP to ChatGPT Plus and much more.",
+                "hero.button": "Buy Now",
+                
+                // Products
+                "products.title": "Products",
+                "products.featured": "Featured",
+                "products.all": "All",
+                
+                // Features
+                "features.title": "Why Choose",
+                "features.us": "Us?",
+                "features.fast.title": "Fast Transactions",
+                "features.fast.description": "Receive accounts immediately after successful payment.",
+                "features.secure.title": "Absolute Security",
+                "features.secure.description": "Personal information and transactions are securely protected.",
+                "features.support.title": "24/7 Support",
+                "features.support.description": "Our support team is always ready to answer any questions.",
+                "features.price.title": "Competitive Prices",
+                "features.price.description": "Commitment to the best prices with top quality service.",
+                
+                // Cart
+                "cart.title": "Shopping Cart",
+                "cart.total": "Total",
+                "cart.checkout": "Checkout",
+                "cart.empty": "Your cart is empty",
+                
+                // Footer
+                "footer.about.title": "PremiumHub",
+                "footer.about.description": "Trusted destination for premium accounts and pro tools with affordable prices and guaranteed quality.",
+                "footer.links.title": "Quick Links",
+                "footer.services.title": "Popular Services",
+                "footer.contact.title": "Contact",
+                "footer.contact.address": "Hanoi, Vietnam",
+                "footer.rights": "All rights reserved.",
+                
+                // Categories
+                "category.video": "Video Editing",
+                "category.photo": "Photo Editing",
+                "category.ai": "AI Tools",
+                "category.design": "Design",
+                "category.education": "Education",
+                "category.entertainment": "Entertainment",
+                "category.productivity": "Productivity",
+                
+                // Product actions
+                "product.add": "Add to Cart",
+                "product.buy": "Buy Now",
+                
+                // Notifications
+                "notification.added": "has been added to cart!",
+                "notification.empty": "Your cart is empty!"
+            },
+            zh: {
+                // Navigation
+                "nav.home": "首页",
+                "nav.products": "产品",
+                "nav.features": "特点",
+                "nav.support": "支持",
+                "nav.contact": "联系",
+                
+                // Languages
+                "lang.vietnamese": "越南语",
+                "lang.english": "英语",
+                "lang.chinese": "中文",
+                "lang.japanese": "日语",
+                "lang.korean": "韩语",
+                
+                // Hero
+                "hero.title": "高级账户和专业工具",
+                "hero.description": "以市场最佳价格升级您的体验。我们提供从Capcut Pro、Meitu VIP到ChatGPT Plus等多种服务。",
+                "hero.button": "立即购买",
+                
+                // Products
+                "products.title": "产品",
+                "products.featured": "特色",
+                "products.all": "全部",
+                
+                // Features
+                "features.title": "为什么选择",
+                "features.us": "我们?",
+                "features.fast.title": "快速交易",
+                "features.fast.description": "付款成功后立即收到账户。",
+                "features.secure.title": "绝对安全",
+                "features.secure.description": "个人信息和交易受到安全保护。",
+                "features.support.title": "24/7支持",
+                "features.support.description": "我们的支持团队随时准备回答任何问题。",
+                "features.price.title": "有竞争力的价格",
+                "features.price.description": "承诺以顶级服务质量提供最佳价格。",
+                
+                // Cart
+                "cart.title": "购物车",
+                "cart.total": "总计",
+                "cart.checkout": "结账",
+                "cart.empty": "您的购物车是空的",
+                
+                // Footer
+                "footer.about.title": "PremiumHub",
+                "footer.about.description": "值得信赖的高级账户和专业工具目的地，价格实惠，质量有保证。",
+                "footer.links.title": "快速链接",
+                "footer.services.title": "热门服务",
+                "footer.contact.title": "联系",
+                "footer.contact.address": "河内, 越南",
+                "footer.rights": "保留所有权利。",
+                
+                // Categories
+                "category.video": "视频编辑",
+                "category.photo": "照片编辑",
+                "category.ai": "AI工具",
+                "category.design": "设计",
+                "category.education": "教育",
+                "category.entertainment": "娱乐",
+                "category.productivity": "生产力",
+                
+                // Product actions
+                "product.add": "加入购物车",
+                "product.buy": "立即购买",
+                
+                // Notifications
+                "notification.added": "已添加到购物车！",
+                "notification.empty": "您的购物车是空的！"
+            },
+            ja: {
+                // Navigation
+                "nav.home": "ホーム",
+                "nav.products": "製品",
+                "nav.features": "特徴",
+                "nav.support": "サポート",
+                "nav.contact": "連絡",
+                
+                // Languages
+                "lang.vietnamese": "ベトナム語",
+                "lang.english": "英語",
+                "lang.chinese": "中国語",
+                "lang.japanese": "日本語",
+                "lang.korean": "韓国語",
+                
+                // Hero
+                "hero.title": "プレミアムアカウントとプロツール",
+                "hero.description": "市場最高価格でプレミアムアカウントを体験してください。Capcut Pro、Meitu VIPからChatGPT Plusまで、多様なサービスを提供しています。",
+                "hero.button": "今すぐ購入",
+                
+                // Products
+                "products.title": "製品",
+                "products.featured": "注目",
+                "products.all": "すべて",
+                
+                // Features
+                "features.title": "なぜ選ぶ",
+                "features.us": "私たち?",
+                "features.fast.title": "高速取引",
+                "features.fast.description": "支払い成功後すぐにアカウントを受け取ります。",
+                "features.secure.title": "絶対的なセキュリティ",
+                "features.secure.description": "個人情報と取引は安全に保護されています。",
+                "features.support.title": "24時間サポート",
+                "features.support.description": "サポートチームはいつでも質問にお答えします。",
+                "features.price.title": "競争力のある価格",
+                "features.price.description": "最高品質のサービスで最良の価格を約束します。",
+                
+                // Cart
+                "cart.title": "ショッピングカート",
+                "cart.total": "合計",
+                "cart.checkout": "チェックアウト",
+                "cart.empty": "カートは空です",
+                
+                // Footer
+                "footer.about.title": "PremiumHub",
+                "footer.about.description": "手頃な価格と保証された品質で、プレミアムアカウントとプロツールの信頼できる目的地。",
+                "footer.links.title": "クイックリンク",
+                "footer.services.title": "人気サービス",
+                "footer.contact.title": "連絡",
+                "footer.contact.address": "ハノイ, ベトナム",
+                "footer.rights": "全著作権所有。",
+                
+                // Categories
+                "category.video": "動画編集",
+                "category.photo": "写真編集",
+                "category.ai": "AIツール",
+                "category.design": "デザイン",
+                "category.education": "教育",
+                "category.entertainment": "エンターテイメント",
+                "category.productivity": "生産性",
+                
+                // Product actions
+                "product.add": "カートに追加",
+                "product.buy": "今すぐ購入",
+                
+                // Notifications
+                "notification.added": "がカートに追加されました！",
+                "notification.empty": "カートは空です！"
+            },
+            ko: {
+                // Navigation
+                "nav.home": "홈",
+                "nav.products": "제품",
+                "nav.features": "특징",
+                "nav.support": "지원",
+                "nav.contact": "연락",
+                
+                // Languages
+                "lang.vietnamese": "베트남어",
+                "lang.english": "영어",
+                "lang.chinese": "중국어",
+                "lang.japanese": "일본어",
+                "lang.korean": "한국어",
+                
+                // Hero
+                "hero.title": "프리미엄 계정 및 프로 도구",
+                "hero.description": "시장 최고 가격으로 프리미엄 계정을 경험해보세요. Capcut Pro, Meitu VIP부터 ChatGPT Plus까지 다양한 서비스를 제공합니다.",
+                "hero.button": "지금 구매",
+                
+                // Products
+                "products.title": "제품",
+                "products.featured": "주요",
+                "products.all": "모두",
+                
+                // Features
+                "features.title": "왜 선택하는가",
+                "features.us": "우리?",
+                "features.fast.title": "빠른 거래",
+                "features.fast.description": "결제 성공 후 즉시 계정을 받으세요.",
+                "features.secure.title": "절대적 보안",
+                "features.secure.description": "개인 정보와 거래는 안전하게 보호됩니다.",
+                "features.support.title": "24/7 지원",
+                "features.support.description": "지원 팀은 항상 질문에 답변할 준비가 되어 있습니다.",
+                "features.price.title": "경쟁력 있는 가격",
+                "features.price.description": "최고 품질의 서비스로 최고의 가격을 약속합니다.",
+                
+                // Cart
+                "cart.title": "쇼핑 카트",
+                "cart.total": "총계",
+                "cart.checkout": "결제",
+                "cart.empty": "카트가 비어 있습니다",
+                
+                // Footer
+                "footer.about.title": "PremiumHub",
+                "footer.about.description": "합리적인 가격과 보장된 품질로 프리미엄 계정 및 프로 도구를 위한 신뢰할 수 있는 목적지.",
+                "footer.links.title": "빠른 링크",
+                "footer.services.title": "인기 서비스",
+                "footer.contact.title": "연락",
+                "footer.contact.address": "하노이, 베트남",
+                "footer.rights": "모든 권리 보유.",
+                
+                // Categories
+                "category.video": "비디오 편집",
+                "category.photo": "사진 편집",
+                "category.ai": "AI 도구",
+                "category.design": "디자인",
+                "category.education": "교육",
+                "category.entertainment": "엔터테인먼트",
+                "category.productivity": "생산성",
+                
+                // Product actions
+                "product.add": "카트에 추가",
+                "product.buy": "지금 구매",
+                
+                // Notifications
+                "notification.added": "이(가) 카트에 추가되었습니다!",
+                "notification.empty": "카트가 비어 있습니다!"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product data
+            const products = [
+                {
+                    id: 1,
+                    title: "Capcut Pro",
+                    category: "video",
+                    description: "Tài khoản Capcut Pro với đầy đủ tính năng cao cấp, hiệu ứng độc quyền và không watermark.",
+                    basePrice: 20000,
+                    durations: [
+                        { name: "7 ngày", price: 20000 },
+                        { name: "1 tháng", price: 50000 },
+                        { name: "3 tháng", price: 120000 },
+                        { name: "6 tháng", price: 200000 },
+                        { name: "12 tháng", price: 350000 }
+                    ],
+                    icon: "fas fa-video",
+                    badge: "Bán chạy"
+                },
+                {
+                    id: 2,
+                    title: "Meitu VIP",
+                    category: "photo",
+                    description: "Tài khoản Meitu VIP với bộ lọc cao cấp, công cụ chỉnh sửa chuyên nghiệp và hiệu ứng độc quyền.",
+                    basePrice: 20000,
+                    durations: [
+                        { name: "7 ngày", price: 20000 },
+                        { name: "1 tháng", price: 50000 },
+                        { name: "3 tháng", price: 120000 },
+                        { name: "6 tháng", price: 200000 },
+                        { name: "12 tháng", price: 350000 }
+                    ],
+                    icon: "fas fa-camera",
+                    badge: "Hot"
+                },
+                {
+                    id: 3,
+                    title: "ChatGPT Plus",
+                    category: "ai",
+                    description: "Truy cập không giới hạn vào ChatGPT Plus với tốc độ nhanh hơn và ưu tiên truy cập.",
+                    basePrice: 90000,
+                    durations: [
+                        { name: "1 tháng", price: 90000 },
+                        { name: "3 tháng", price: 250000 },
+                        { name: "6 tháng", price: 450000 },
+                        { name: "12 tháng", price: 800000 }
+                    ],
+                    icon: "fas fa-robot",
+                    badge: "Mới"
+                },
+                {
+                    id: 4,
+                    title: "Canva Pro",
+                    category: "design",
+                    description: "Tài khoản Canva Pro với thư viện template khổng lồ, hình ảnh premium và công cụ thiết kế chuyên nghiệp.",
+                    basePrice: 20000,
+                    durations: [
+                        { name: "1 tháng", price: 20000 },
+                        { name: "6 tháng", price: 70000 },
+                        { name: "1 năm", price: 150000 }
+                    ],
+                    icon: "fas fa-palette",
+                    badge: "Phổ biến"
+                },
+                {
+                    id: 5,
+                    title: "Duolingo Super",
+                    category: "education",
+                    description: "Tài khoản Duolingo Super với học tập không quảng cáo, bài học không giới hạn và tính năng nâng cao.",
+                    basePrice: 220000,
+                    durations: [
+                        { name: "1 năm", price: 220000 }
+                    ],
+                    icon: "fas fa-language",
+                    badge: "Tiết kiệm"
+                },
+                {
+                    id: 6,
+                    title: "Netflix Premium",
+                    category: "entertainment",
+                    description: "Tài khoản Netflix Premium với chất lượng 4K, xem trên 4 thiết bị cùng lúc và không quảng cáo.",
+                    basePrice: 120000,
+                    durations: [
+                        { name: "1 tháng", price: 120000 },
+                        { name: "3 tháng", price: 320000 },
+                        { name: "6 tháng", price: 600000 }
+                    ],
+                    icon: "fas fa-film",
+                    badge: "Xem nhiều"
+                },
+                {
+                    id: 7,
+                    title: "YouTube Premium",
+                    category: "entertainment",
+                    description: "Tài khoản YouTube Premium với không quảng cáo, nghe nhạc nền và tải video offline.",
+                    basePrice: 80000,
+                    durations: [
+                        { name: "1 tháng", price: 80000 },
+                        { name: "3 tháng", price: 210000 },
+                        { name: "6 tháng", price: 380000 }
+                    ],
+                    icon: "fab fa-youtube",
+                    badge: "Ưa thích"
+                },
+                {
+                    id: 8,
+                    title: "Office 365",
+                    category: "productivity",
+                    description: "Tài khoản Office 365 với đầy đủ ứng dụng Word, Excel, PowerPoint và 1TB lưu trữ đám mây.",
+                    basePrice: 150000,
+                    durations: [
+                        { name: "6 tháng", price: 150000 },
+                        { name: "1 năm", price: 250000 }
+                    ],
+                    icon: "fas fa-file-alt",
+                    badge: "Cần thiết"
+                }
+            ];
+
+            // Get unique categories
+            const categories = [...new Set(products.map(product => product.category))];
+            
+            // Shopping cart
+            let cart = [];
+            const cartIcon = document.getElementById('cartIcon');
+            const cartModal = document.getElementById('cartModal');
+            const closeCart = document.getElementById('closeCart');
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const productGrid = document.getElementById('productGrid');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const languageSelector = document.getElementById('languageSelector');
+            const languageDropdown = document.getElementById('languageDropdown');
+            const currentLanguage = document.querySelector('.current-language');
+
+            // Current language
+            let currentLang = 'vi';
+
+            // Change language function
+            function changeLanguage(lang) {
+                currentLang = lang;
+                
+                // Update all elements with data-i18n attribute
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.textContent = translations[lang][key];
+                    }
+                });
+                
+                // Update current language display
+                const flagSrc = {
+                    'vi': 'https://flagcdn.com/w40/vn.png',
+                    'en': 'https://flagcdn.com/w40/us.png',
+                    'zh': 'https://flagcdn.com/w40/cn.png',
+                    'ja': 'https://flagcdn.com/w40/jp.png',
+                    'ko': 'https://flagcdn.com/w40/kr.png'
+                };
+                
+                currentLanguage.querySelector('img').src = flagSrc[lang];
+                currentLanguage.querySelector('span').textContent = translations[lang]['lang.' + lang];
+                
+                // Update product buttons
+                updateProductButtons();
+                
+                // Update cart
+                updateCart();
+                
+                // Close language dropdown
+                languageDropdown.classList.remove('show');
+            }
+
+            // Update product buttons text
+            function updateProductButtons() {
+                document.querySelectorAll('.product-actions .btn').forEach((btn, index) => {
+                    if (index % 2 === 0) {
+                        btn.textContent = translations[currentLang]['product.add'];
+                    } else {
+                        btn.textContent = translations[currentLang]['product.buy'];
+                    }
+                });
+            }
+
+            // Display categories
+            function displayCategories() {
+                categoryFilter.innerHTML = `<button class="category-btn active" data-category="all">${translations[currentLang]['products.all']}</button>`;
+                
+                categories.forEach(category => {
+                    const categoryBtn = document.createElement('button');
+                    categoryBtn.className = 'category-btn';
+                    categoryBtn.textContent = translations[currentLang][`category.${category}`];
+                    categoryBtn.setAttribute('data-category', category);
+                    categoryFilter.appendChild(categoryBtn);
+                });
+                
+                // Add event listeners to category buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        filterProducts(this.getAttribute('data-category'));
+                    });
+                });
+            }
+
+            // Filter products by category
+            function filterProducts(category) {
+                const filteredProducts = category === 'all' 
+                    ? products 
+                    : products.filter(product => product.category === category);
+                
+                displayProducts(filteredProducts);
+            }
+
+            // Display products
+            function displayProducts(productsToDisplay = products) {
+                productGrid.innerHTML = '';
+                productsToDisplay.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    let durationButtons = '';
+                    product.durations.forEach((duration, index) => {
+                        durationButtons += `<button class="duration-btn ${index === 0 ? 'active' : ''}" 
+                                            data-price="${duration.price}" 
+                                            data-duration="${duration.name}">${duration.name}</button>`;
+                    });
+                    
+                    productCard.innerHTML = `
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <div class="product-image">
+                            <i class="${product.icon}"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.title}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-price">${formatPrice(product.basePrice)} VND</div>
+                            <div class="product-duration">
+                                ${durationButtons}
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn">${translations[currentLang]['product.add']}</button>
+                                <button class="btn btn-accent">${translations[currentLang]['product.buy']}</button>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.appendChild(productCard);
+                    
+                    // Add event listeners to duration buttons
+                    productCard.querySelectorAll('.duration-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            productCard.querySelectorAll('.duration-btn').forEach(b => b.classList.remove('active'));
+                            this.classList.add('active');
+                            const price = this.getAttribute('data-price');
+                            productCard.querySelector('.product-price').textContent = `${formatPrice(price)} VND`;
+                        });
+                    });
+                    
+                    // Add event listeners to action buttons
+                    const actionButtons = productCard.querySelectorAll('.product-actions .btn');
+                    actionButtons[0].addEventListener('click', () => addToCart(product.id));
+                    actionButtons[1].addEventListener('click', () => buyNow(product.id));
+                });
+            }
+
+            // Format price with commas
+            function formatPrice(price) {
+                return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            // Get selected duration and price for a product
+            function getSelectedDuration(productId) {
+                const productCards = Array.from(productGrid.children);
+                const productIndex = products.findIndex(p => p.id === productId);
+                if (productIndex === -1) return products.find(p => p.id === productId).durations[0];
+                
+                const productCard = productCards[productIndex];
+                if (!productCard) return products.find(p => p.id === productId).durations[0];
+                
+                const activeBtn = productCard.querySelector('.duration-btn.active');
+                return {
+                    name: activeBtn.getAttribute('data-duration'),
+                    price: parseInt(activeBtn.getAttribute('data-price'))
+                };
+            }
+
+            // Add to cart function
+            function addToCart(productId) {
+                const product = products.find(p => p.id === productId);
+                const duration = getSelectedDuration(productId);
+                
+                const existingItem = cart.find(item => 
+                    item.id === productId && item.duration.name === duration.name
+                );
+                
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        title: product.title,
+                        duration: duration,
+                        price: duration.price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                showNotification(`${product.title} (${duration.name}) ${translations[currentLang]['notification.added']}`);
+            };
+
+            // Buy now function
+            function buyNow(productId) {
+                addToCart(productId);
+                cartModal.style.display = 'flex';
+            };
+
+            // Update cart display
+            function updateCart() {
+                cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+                
+                cartItems.innerHTML = '';
+                let total = 0;
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = `<p style="text-align: center; color: #aaa;">${translations[currentLang]['cart.empty']}</p>`;
+                } else {
+                    cart.forEach(item => {
+                        const itemTotal = item.price * item.quantity;
+                        total += itemTotal;
+                        
+                        const cartItem = document.createElement('div');
+                        cartItem.className = 'cart-item';
+                        cartItem.innerHTML = `
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">${item.title}</div>
+                                <div class="cart-item-duration">${item.duration.name}</div>
+                                <div class="cart-item-price">${formatPrice(item.price)} VND</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn">+</button>
+                            </div>
+                            <div class="cart-item-total">${formatPrice(itemTotal)} VND</div>
+                            <button class="remove-item">✕</button>
+                        `;
+                        cartItems.appendChild(cartItem);
+                        
+                        // Add event listeners to quantity buttons
+                        const quantityBtns = cartItem.querySelectorAll('.quantity-btn');
+                        quantityBtns[0].addEventListener('click', () => decreaseQuantity(item.id, item.duration.name));
+                        quantityBtns[1].addEventListener('click', () => increaseQuantity(item.id, item.duration.name));
+                        cartItem.querySelector('.remove-item').addEventListener('click', () => removeFromCart(item.id, item.duration.name));
+                    });
+                }
+                
+                cartTotal.textContent = formatPrice(total);
+            }
+
+            // Increase quantity
+            function increaseQuantity(productId, durationName) {
+                const item = cart.find(item => item.id === productId && item.duration.name === durationName);
+                if (item) {
+                    item.quantity++;
+                    updateCart();
+                }
+            };
+
+            // Decrease quantity
+            function decreaseQuantity(productId, durationName) {
+                const item = cart.find(item => item.id === productId && item.duration.name === durationName);
+                if (item) {
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        removeFromCart(productId, durationName);
+                    }
+                    updateCart();
+                }
+            };
+
+            // Remove from cart
+            function removeFromCart(productId, durationName) {
+                cart = cart.filter(item => !(item.id === productId && item.duration.name === durationName));
+                updateCart();
+            };
+
+            // Show notification
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--primary);
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    z-index: 1001;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    animation: slideIn 0.3s ease;
+                    max-width: 300px;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+
+            // Checkout function
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    showNotification(translations[currentLang]['notification.empty']);
+                    return;
+                }
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const orderDetails = cart.map(item => 
+                    `${item.title} (${item.duration.name}) x${item.quantity} - ${formatPrice(item.price * item.quantity)} VND`
+                ).join('\n');
+                
+                const message = `Xin chào, tôi muốn mua:\n${orderDetails}\nTổng cộng: ${formatPrice(total)} VND`;
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Open WhatsApp with pre-filled message
+                window.open(`https://wa.me/84123456789?text=${encodedMessage}`, '_blank');
+            });
+
+            // Event listeners
+            cartIcon.addEventListener('click', () => {
+                cartModal.style.display = 'flex';
+            });
+
+            closeCart.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+
+            cartModal.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+
+            // Language selector
+            languageSelector.addEventListener('click', (e) => {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('show');
+            });
+
+            // Language options
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const lang = option.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+
+            // Close language dropdown when clicking outside
+            document.addEventListener('click', () => {
+                languageDropdown.classList.remove('show');
+            });
+
+            // Initialize
+            changeLanguage('vi');
+            displayCategories();
+            displayProducts();
+            updateCart();
+
+            // Add CSS for notification animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
